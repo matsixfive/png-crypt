@@ -9,7 +9,7 @@ use crate::{Error, Result};
 /// http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChunkType {
-    chunk: [u8; 4]
+    pub chunk: [u8; 4]
 }
 
 #[allow(unused)]
@@ -43,6 +43,7 @@ impl ChunkType {
         self.chunk[3] & 0b100000 != 0
     }
 
+
     /// Returns true if the reserved byte is valid and all four bytes are represented by the characters A-Z or a-z.
     /// Note that this chunk type should always be valid as it is validated during construction.
     pub fn is_valid(&self) -> bool {
@@ -57,7 +58,6 @@ impl ChunkType {
 
     /// Valid bytes are represented by the characters A-Z or a-z
     pub fn is_valid_byte(byte: u8) -> bool {
-        println!("{} {} {}", byte, std::str::from_utf8(&[byte]).unwrap(), (65..90).contains(&byte) || (97..122).contains(&byte));
         (65..90).contains(&byte) || (97..122).contains(&byte) 
     }
 }
