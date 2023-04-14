@@ -94,6 +94,8 @@ impl TryFrom<&[u8]> for Png {
         let raw_chunks = &bytes[8..];
         let mut chunks: Vec<Chunk> = Vec::new();
 
+        // this is a bit of a hack, but it works for now
+        // todo: find length of chunk first and then use that to slice
         let mut i = 0;
         while i < raw_chunks.len() {
             let chunk = Chunk::try_from(&raw_chunks[i..])?;
